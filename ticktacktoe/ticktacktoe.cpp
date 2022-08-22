@@ -1,4 +1,5 @@
 #include <iostream>
+#include <conio.h>
 
 #define EMPTY 0
 #define X 1
@@ -23,6 +24,7 @@ bool IsWin(int number);
 int Win();
 void Add(int object, int coord);
 void Game();
+void EndGame();
 
 int main()
 {
@@ -32,6 +34,7 @@ int main()
 		Game();
 	} while (isGameOver != true);
 	ShowTable();
+	EndGame();
 }
 
 void init() {
@@ -45,7 +48,7 @@ void Add(int object, int coord) {
 }
 
 std::string GetObject(int index) {
-	if (coords[index] == EMPTY)  return "N";
+	if (coords[index] == EMPTY)  return ".";
 	else if (coords[index] == X) return "X";
 	else if (coords[index] == O) return "O";
 }
@@ -107,8 +110,17 @@ int Win() {
 }
 
 bool IsWin(int number) {
+	if (number == 1) object = true;
+	else if (number == -1) object = false;
 	if (number == 1 || number == -1) return true;
 	return false;
+}
+
+void EndGame() {
+	std::string m_object = GetObject(!object, "");
+	for (int i = 0; i < 2; i++) std::cout << std::endl;
+	std::cout << m_object << " : " << "Won." << std::endl;
+	_getch();
 }
 
 void Game() {
@@ -120,9 +132,7 @@ void Game() {
 	
 	ShowTable();
 
-	std::cout << std::endl;
-	std::cout << std::endl;
-	std::cout << std::endl;
+	for (int i = 0; i < 3; i++) std::cout << std::endl;
 
 	int coord;
 	std::cout << GetObject(object, "") << " , Please enter a coord (1-9) : ";

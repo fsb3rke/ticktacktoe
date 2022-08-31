@@ -1,3 +1,5 @@
+// Author: fsb3rke
+
 #include <iostream>
 #include <conio.h>
 
